@@ -1,36 +1,39 @@
-//taks
+#include<stdio.h>
+#define N 5
+int max1(int * p,int head, int end)
 {
-    "tasks": [
+    if((end-head)<1) return 0;
+    int temp = *(p+head),end1=end;
+    while (head<end)
+    {
+        for(;head<end;end--)
+        if(*(end+p)<temp)
         {
-            "type": "cppbuild",
-            "label": "C/C++: gcc.exe build active file",
-            "command": "C:\\cc\\mingw64\\bin\\gcc.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "C:\\cc\\mingw64\\bin"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Generated task by Debugger"
+            *(head+p) =*(end+p);break;
+            
         }
-    ],
-    "version": "2.0.0",
-    "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "new", //这里shared表示共享，改成new之后每个进程创建新的端口
-        "showReuseMessage": true,
-        "clear": false
+        for(;head<end;head++)
+        if(*(head+p)>temp)
+        {
+            *(end+p) = *(head+p);break;
+        }
+        
     }
+    *(head+p) = temp;
+        
+        max1(p,0,head-1);
+        max1(p,head+1,end1);
+    return 0 ;
 }
+
+int main()
+{
+    int a[N];
+    for(int i = 0;i<N;i++)
+    scanf("%d",&a[i]);
+    max1(a,0,N-1);
+    for(int i = 0;i<N;i++)
+    printf("%d",a[i]);
+    return 0 ;
+}
+

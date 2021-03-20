@@ -5,7 +5,9 @@ int main()
     FILE *fp;
     char filename[10],ch;
     scanf("%s",filename);
-    fp=fopen(filename,"r+");
+    if(fp=fopen(filename,"r+")==NULL){
+    printf("查无此文件");
+    exit(0);}  //无此文件关闭程序
     ch=fgetc(fp);
     while(ch!=EOF)
     {

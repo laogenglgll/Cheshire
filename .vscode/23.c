@@ -1,30 +1,38 @@
-//launch.json
+#include<stdio.h>
+int main()
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+    int a[4],n;
+    int *p;
+    for(int i=0;i<4;i++)
+    scanf("%d",&a[i]);
+    p=a;
+    sort(a,0,4);
+    for(int i=0;i<4;i++)
+    printf("%d",a[i]);
+    return 0;
+
+}
+int sort(int *p,int n,int x)
+{
+    if ((x-n)<=1)
+    return 0;
+    int moddle,head=n,load=x-1,mod;
+    moddle = x/2;
+    mod=*(p+moddle);
+
+    while (head<load)
+    {
+        for(;head<load;head++)
         {
-            "name": "gcc.exe - 生成和调试活动文件",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "C:\\cc\\mingw64\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "为 gdb 启用整齐打印",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: gcc.exe build active file"
+            if(*(p+head)>mod) {*(p+moddle) = *(p+head),moddle = head;break; }
         }
-    ]
+        for(;load>head;load--)
+        {
+            if(*(p+load)<mod) {*(p+moddle) = *(p+load),moddle = load;break;}
+        }
+    }
+    printf("%d",*p);
+    sort(p,0,moddle);
+    sort(p,moddle+1,4);
+    return 0;
 }
