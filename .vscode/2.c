@@ -43,3 +43,4 @@ int addx(int x,int y)
 	printf("add=");
 	return (z);
 }
+//github测试
